@@ -29,7 +29,7 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
   const { className, ...remainingProps } = props;
 
   const classes = clsx(
-    'bg-transparent text-white',
+    'bg-transparent w-[350px] text-white',
     'mx-2 px-1 py-2',
     'box-border border-gray-400',
     'rounded-lg',
