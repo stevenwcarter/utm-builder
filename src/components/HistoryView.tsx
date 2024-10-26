@@ -29,6 +29,7 @@ export const HistoryView = (props: HistoryViewProps) => {
               className="text-sm text-white w-full flex justify-start items-center"
             >
               <Button
+                aria-label="Remove from history"
                 className="text-white break-all max-w-full"
                 size={'sm'}
                 type={ButtonTypes.DANGER}
@@ -37,6 +38,7 @@ export const HistoryView = (props: HistoryViewProps) => {
                 <FontAwesomeIcon icon={faTrashAlt} />
               </Button>
               <button
+                aria-label="history entry"
                 className="text-white bg-slate-700 py-1 px-2 rounded-xl"
                 onClick={() => repopulateEntry(h)}
               >
