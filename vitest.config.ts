@@ -10,7 +10,7 @@ export default defineConfig((configEnv) =>
         environment: 'jsdom',
         // setupFiles: ['./setupVitest.ts'],
         coverage: {
-          reporter: ['junit', 'text', 'html', 'cobertura', 'lcov', 'json-summary'],
+          reporter: ['text', 'html', 'cobertura', 'lcov', 'json-summary'],
           exclude: [
             '**/[.]**',
             '**/*.cjs',
