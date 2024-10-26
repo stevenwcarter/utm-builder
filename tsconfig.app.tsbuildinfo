@@ -1,1 +1,1 @@
-{"root":["./src/App.test.tsx","./src/App.tsx","./src/Input.tsx","./src/Inputs.tsx","./src/global.d.ts","./src/main.tsx","./src/urlBuilder.ts","./src/vite-env.d.ts"],"version":"5.6.3"}
+{"root":["./src/App.test.tsx","./src/App.tsx","./src/global.d.ts","./src/main.tsx","./src/urlBuilder.ts","./src/vite-env.d.ts","./src/components/Button.tsx","./src/components/Input.tsx","./src/components/Inputs.tsx","./src/components/Parameter.tsx","./src/hooks/useUrlBuilder.ts"],"version":"5.6.3"}

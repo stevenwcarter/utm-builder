@@ -1,34 +1,14 @@
-import { ForwardedRef, forwardRef, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
-import { Input } from './Inputs';
 import { UrlBuilderProps, urlBuilder } from './urlBuilder';
 import { ToastContainer, toast } from 'react-toastify';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import Button, { ButtonTypes } from './Button';
-
-const Parameter = forwardRef((props: any, ref: ForwardedRef<HTMLInputElement>) => {
-  const { name, value, setter } = props;
-
-  return (
-    <div ref={ref} className="flex">
-      <span className="min-w-48 self-center text-right">{name}</span>
-      <Input value={value} onChange={(e) => setter(e.target.value)} />
-    </div>
-  );
-});
-
-const useUrlBuilder = (props: UrlBuilderProps) => {
-  const [urlResult, setUrlResult] = useState('');
-
-  useEffect(() => {
-    setUrlResult(urlBuilder(props) || '');
-  }, [props]);
-
-  return { urlResult };
-};
+import Button, { ButtonTypes } from './components/Button';
+import { useUrlBuilder } from './hooks/useUrlBuilder';
+import { Parameter } from './components/Parameter';
 
 function App() {
   const topRef = useRef<HTMLInputElement>(null);
@@ -130,7 +110,7 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col h-screen overflow-y-auto p-8 w-full">
         <h1 className="mb-8">Marketing URL Builder</h1>
         <div className="self-center flex flex-col gap-2">
           <Parameter ref={topRef} name="URL" value={url} setter={setUrl} />
@@ -158,7 +138,7 @@ function App() {
           </div>
         )}
         {history && history.length > 0 && (
-          <div className="flex flex-col mt-9">
+          <div className="flex flex-col mt-9 max-w-[1280px] m-auto">
             <h2>History</h2>
             <p>(Click to put back into editor)</p>
             <div className="flex flex-col gap-2 m-4 break-all">
