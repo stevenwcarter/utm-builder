@@ -6,9 +6,9 @@ export const Parameter = forwardRef((props: any, ref: ForwardedRef<HTMLInputElem
 
   return (
     <div ref={ref} className="flex">
-      <span className="w-20 md:w-32 lg:w-48 self-center text-right">{name}</span>
+      <span className="w-20 md:w-48 lg:w-80 self-center text-right">{name}</span>
       <Input
-        className="w-[180px] sm:w-[220px] md:w-[420px] lg:w-[550px]"
+        className="w-[180px] xs:w-[250px] sm:w-[350px] md:w-[450px] lg:w-[550px]"
         value={value}
         onChange={(e) => setter(e.target.value)}
       />
