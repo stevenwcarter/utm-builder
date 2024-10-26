@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react-swc';
 import eslint from 'vite-plugin-eslint';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 import svgrPlugin from 'vite-plugin-svgr';
+import { codecovVitePlugin } from '@codecov/vite-plugin';
 
 const rawPlugin = function rawPlugin(options: any) {
   return {
@@ -33,6 +34,11 @@ export default defineConfig(() => {
       eslint(),
       viteTsconfigPaths(),
       svgrPlugin(),
+      codecovVitePlugin({
+        enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
+        bundleName: 'utm-builder',
+        uploadToken: process.env.CODECOV_TOKEN,
+      }),
     ],
   };
 });
