@@ -76,8 +76,11 @@ jobs:
         cmd: install --immutable
     - name: Build production bundle
       uses: borales/actions-yarn@v5
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       with:
         cmd: build
+        token: ${{ secrets.CODECOV_TOKEN }}
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v5
