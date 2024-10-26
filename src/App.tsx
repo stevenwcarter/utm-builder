@@ -1,21 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
-import { UrlBuilderProps, urlBuilder } from './urlBuilder';
+import { UrlBuilderProps, UrlBuilderPropsWithResult, urlBuilder } from './urlBuilder';
 import { ToastContainer, toast } from 'react-toastify';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import 'react-toastify/dist/ReactToastify.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import Button, { ButtonTypes } from './components/Button';
 import { useUrlBuilder } from './hooks/useUrlBuilder';
 import { Parameter } from './components/Parameter';
+import { HistoryView } from './components/HistoryView';
+
+export const MAX_HISTORY = 50;
 
 function App() {
   const topRef = useRef<HTMLInputElement>(null);
-  const [history, setHistory] = useLocalStorage<(UrlBuilderProps & { urlResult: string })[]>(
-    'urlHistory',
-    [],
-  );
+  const [history, setHistory] = useLocalStorage<UrlBuilderPropsWithResult[]>('urlHistory', []);
   const [url, setUrl] = useState('');
   const [source, setSource] = useState('');
   const [medium, setMedium] = useState('');
@@ -75,8 +72,8 @@ function App() {
 
     newHistory.unshift(entry);
 
-    if (newHistory.length > 50) {
-      newHistory = newHistory.slice(0, 50);
+    if (newHistory.length > MAX_HISTORY) {
+      newHistory = newHistory.slice(0, MAX_HISTORY);
     }
 
     setHistory(newHistory);
@@ -137,39 +134,11 @@ function App() {
             </button>
           </div>
         )}
-        {history && history.length > 0 && (
-          <div className="flex flex-col mt-9 max-w-[1280px] m-auto">
-            <h2>History</h2>
-            <p>(Click to put back into editor)</p>
-            <div className="flex flex-col gap-2 m-4 break-all">
-              {history.map((h, i) => {
-                const urlHistoryResult = urlBuilder(h);
-
-                return (
-                  <div
-                    key={`${h.url}-${i}`}
-                    className="text-sm text-white w-full flex justify-start items-center"
-                  >
-                    <Button
-                      className="text-white break-all max-w-full"
-                      size={'sm'}
-                      type={ButtonTypes.DANGER}
-                      onClick={() => removeFromHistory(urlHistoryResult)}
-                    >
-                      <FontAwesomeIcon icon={faTrashAlt} />
-                    </Button>
-                    <button
-                      className="text-white bg-slate-700 py-1 px-2 rounded-xl"
-                      onClick={() => repopulateEntry(h)}
-                    >
-                      {urlHistoryResult}
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
+        <HistoryView
+          removeFromHistory={removeFromHistory}
+          repopulateEntry={repopulateEntry}
+          history={history}
+        />
         <ToastContainer />
       </div>
     </>

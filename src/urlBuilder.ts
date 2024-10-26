@@ -14,6 +14,7 @@ export interface UrlBuilderProps {
   content?: string;
   term?: string;
 }
+export type UrlBuilderPropsWithResult = UrlBuilderProps & { urlResult: string };
 
 // http://www.constellation.com
 // ?utm_source=google
