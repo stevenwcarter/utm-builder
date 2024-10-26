@@ -120,7 +120,7 @@ const paidSocialHandler = (d: UrlBuilderProps, params: URLSearchParams) => {
       ['{{placement}}', lp(d.audience)]
         .filter((a) => a !== '')
         .join('_')
-        .replace('__', '_'),
+        .replace(/_{2,}/, '_'),
     );
   }
 
