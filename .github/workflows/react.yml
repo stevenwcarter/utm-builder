@@ -32,7 +32,7 @@ jobs:
     - name: Build production bundle
       uses: borales/actions-yarn@v5
       with:
-        cmd: test --reporter=junit
+        cmd: test --reporter=junit --outputFile=junit.xml
     - name: Upload test results to Codecov
       if: ${{ !cancelled() }}
       uses: codecov/test-results-action@v1
